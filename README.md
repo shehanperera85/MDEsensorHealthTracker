@@ -7,9 +7,8 @@ In this way, for the notification time gap, I think 24hrs is a good interval.
 
 Workflow in a nutshell 👇🏽
 
-
-Prerequisites
-Least privileges of View data- security operations role is required for Viewing hunting data.
+**Prerequisites
+**Least privileges of View data- security operations role is required for Viewing hunting data.
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/5904ecac-b93e-48b2-8e40-f2f6c78f6d11)
 
 
