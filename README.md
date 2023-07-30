@@ -22,8 +22,9 @@ Create a resource > Logic App (by providing the name and other attributes)
 Next Steps
 Go to the Workflows section
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/9a284837-eacf-44cb-a7be-77c60aa58034)
+
 Add a new Workflow with the type Stateful
-![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/41f0c4dc-a3db-4ef2-8781-af0f411b376e)
+
 
 Add the trigger
 
