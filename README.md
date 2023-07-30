@@ -24,7 +24,6 @@ Next Steps
 Go to the Workflows section
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/9a284837-eacf-44cb-a7be-77c60aa58034)
 
-
 Add a new Workflow with the type Stateful
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/41f0c4dc-a3db-4ef2-8781-af0f411b376e)
 
@@ -41,7 +40,7 @@ Add your query
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/12d7824c-eb13-43e8-8fe6-3c3631e73ecd)
 
 Add a Set Variable action so the Value “Results” can be added to the array
-  ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/ad1c0979-b03d-448e-b80f-62a25c7b075b)
+![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/ad1c0979-b03d-448e-b80f-62a25c7b075b)
 
 Add a Create HTML table from the “KQL-Results” array so it will be cleaned for presentation
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/dd967a30-e2f1-40d6-b033-928e6b379137)
