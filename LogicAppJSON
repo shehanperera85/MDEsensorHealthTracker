@@ -1,0 +1,126 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "actions": {
+      "Advanced_Hunting": {
+        "type": "ApiConnection",
+        "inputs": {
+          "host": {
+            "connection": {
+              "referenceName": "wdatp"
+            }
+          },
+          "method": "post",
+          "body": {
+            "Query": "DeviceInfo\n| where SensorHealthState == “Inactive” or SensorHealthState == “Misconfigured”\n| summarize max(Timestamp) by DeviceName, SensorHealthState, OnboardingStatus, OSPlatform\n| extend LastUpdatedTime = max_Timestamp\n| project DeviceName, [‘LastUpdatedTime’],OSPlatform, SensorHealthState, OnboardingStatus"
+          },
+          "path": "/api/advancedqueries/run"
+        },
+        "runAfter": {
+          "Initialize_variable": [
+            "SUCCEEDED"
+          ]
+        }
+      },
+      "Set_variable": {
+        "type": "SetVariable",
+        "inputs": {
+          "name": "KQL-Results",
+          "value": "@body('Advanced_Hunting')?['Results']"
+        },
+        "runAfter": {
+          "Advanced_Hunting": [
+            "SUCCEEDED"
+          ]
+        }
+      },
+      "Initialize_variable": {
+        "type": "InitializeVariable",
+        "inputs": {
+          "variables": [
+            {
+              "name": "KQL-Results",
+              "type": "array"
+            }
+          ]
+        },
+        "runAfter": {}
+      },
+      "Create_HTML_table": {
+        "type": "Table",
+        "inputs": {
+          "from": "@variables('KQL-Results')",
+          "format": "HTML"
+        },
+        "runAfter": {
+          "Set_variable": [
+            "SUCCEEDED"
+          ]
+        }
+      },
+      "Post_message_in_a_chat_or_channel": {
+        "type": "ApiConnection",
+        "inputs": {
+          "host": {
+            "connection": {
+              "referenceName": "teams"
+            }
+          },
+          "method": "post",
+          "body": {
+            "recipient": {
+              "groupId": "47040f5a-64d0-45c8-bd8e-f0856240f47d",
+              "channelId": "19:MN937JlvZ26G8yMFy4I2bZvDH9fEJOyMdomQ0iOUhYs1@thread.tacv2"
+            },
+            "messageBody": "<p>Please check the MDE Sensor Health data for the below devices.</p><p>Troubleshooting guide: <a href=\"https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/fix-unhealthy-sensors?view=o365-worldwide&amp;viewFallbackFrom=o365-worldwide%3FWT.mc_id%3DEM-MVP-5004964\">Fix unhealthy sensors in Microsoft Defender for Endpoint | Microsoft Learn</a></p><p><br></p><p>@{body('Create_HTML_table')}</p><p><br></p>"
+          },
+          "path": "/beta/teams/conversation/message/poster/Flow bot/location/@{encodeURIComponent('Channel')}"
+        },
+        "runAfter": {
+          "Create_HTML_table": [
+            "SUCCEEDED"
+          ]
+        }
+      }
+    },
+    "contentVersion": "1.0.0.0",
+    "outputs": {},
+    "triggers": {
+      "Recurrence": {
+        "type": "Recurrence",
+        "recurrence": {
+          "interval": 3,
+          "frequency": "Minute",
+          "timeZone": "Cen. Australia Standard Time"
+        }
+      }
+    }
+  },
+  "connectionReferences": {
+    "wdatp": {
+      "connection": {
+        "id": "/subscriptions/72ff6629-ff0c-4894-81b9-7656a5802766/resourceGroups/LogicApp/providers/Microsoft.Web/connections/wdatp"
+      },
+      "connectionName": "wdatp",
+      "api": {
+        "id": "/subscriptions/72ff6629-ff0c-4894-81b9-7656a5802766/providers/Microsoft.Web/locations/eastus/managedApis/wdatp"
+      },
+      "authentication": {
+        "type": "ManagedServiceIdentity"
+      }
+    },
+    "teams": {
+      "connection": {
+        "id": "/subscriptions/72ff6629-ff0c-4894-81b9-7656a5802766/resourceGroups/LogicApp/providers/Microsoft.Web/connections/teams"
+      },
+      "connectionName": "teams",
+      "api": {
+        "id": "/subscriptions/72ff6629-ff0c-4894-81b9-7656a5802766/providers/Microsoft.Web/locations/eastus/managedApis/teams"
+      },
+      "authentication": {
+        "type": "ManagedServiceIdentity"
+      }
+    }
+  },
+  "parameters": {}
+}
