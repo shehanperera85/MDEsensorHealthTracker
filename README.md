@@ -33,7 +33,7 @@ Add the trigger
 Add an Initialize Variable action
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/4b8a4edd-a37c-404a-87f6-0d9830280e46)
 
-Create the Action by adding the Advanced Hunting under Microsoft Defender ATP and Sign-in with the account
+Create the Action by adding Advanced Hunting under Microsoft Defender ATP and Sign-in with the account
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/6dfb19a7-da35-4cac-8fd4-6d2a0a7a3fc0)
 
 Add your query
