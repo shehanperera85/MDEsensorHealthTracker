@@ -28,6 +28,7 @@ Add a new Workflow with the type Stateful
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/41f0c4dc-a3db-4ef2-8781-af0f411b376e)
 
 Add the trigger
+
 ![image](https://github.com/shehanperera85/MDEsensorHealthTracker/assets/98259062/1883937c-afef-4791-9042-d90aa5886c8a)
 
 Add an Initialize Variable action
